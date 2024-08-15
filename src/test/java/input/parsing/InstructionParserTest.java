@@ -31,4 +31,11 @@ class InstructionParserTest {
         );
     }
 
+    @Test
+    void testLReturnsArrayWithL(){
+        InstructionParser ip = new InstructionParser();
+        Instruction[] result = ip.parseInstructions("L");
+        assertArrayEquals(new Instruction[]{Instruction.L}, result);
+    }
+
 }
