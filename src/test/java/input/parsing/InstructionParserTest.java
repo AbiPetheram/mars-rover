@@ -66,4 +66,14 @@ class InstructionParserTest {
         );
     }
 
+    @Test
+    void testLReturnsArrayWithMixedStringInvalidInput(){
+        InstructionParser ip = new InstructionParser();
+        assertAll(
+                () -> assertArrayEquals(new Instruction[]{Instruction.L, Instruction.R, Instruction.M}, ip.parseInstructions("LSM")),
+                () -> assertArrayEquals(new Instruction[]{Instruction.R, Instruction.R, Instruction.R, Instruction.M}, ip.parseInstructions("PRRM")),
+                () -> assertArrayEquals(new Instruction[]{Instruction.M, Instruction.R, Instruction.L, Instruction.M}, ip.parseInstructions("MR9M"))
+        );
+    }
+
 }
