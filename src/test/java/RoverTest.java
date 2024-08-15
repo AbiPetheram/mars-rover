@@ -17,6 +17,15 @@ class RoverTest {
     }
 
     @Test
+    void testRotateInputM(){
+        Position position = new Position(new Coordinates(0,0), CompassDirection.NORTH);
+        Plateau plateau = new Plateau();
+        Rover rover = new Rover(position, plateau);
+        rover.rotate(Instruction.M);
+        assertEquals(position, rover.getPosition());
+    }
+
+    @Test
     void testRotateRightStartingEast(){
         Position position = new Position(new Coordinates(0,0), CompassDirection.EAST);
         Plateau plateau = new Plateau();
