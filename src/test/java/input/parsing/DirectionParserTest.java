@@ -16,7 +16,7 @@ class DirectionParserTest {
     @Test
     void testInvalidDirection(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection(new String[]{"q"});
+        CompassDirection result = dp.parseDirection(new char[]{'q'});
         assertEquals(null, result);
     }
 }
