@@ -19,7 +19,16 @@ public class Rover {
         return plateau;
     }
 
-    public void rotate(Instruction instruction){
+    public void move(Instruction[] instructions){
+        //takes array of instructions and decides what to do with it
+    }
+
+    private void moveForward(){
+        //takes Instruction.M and moves forward in a direction
+        //check that the rover can move - is within plateau && position is empty
+    }
+
+    private void rotate(Instruction instruction){
         if(instruction == Instruction.R){
             switch(position.getFacing()){
                 case NORTH -> position = new Position(position.getCoordinates(), CompassDirection.EAST);
