@@ -36,7 +36,7 @@ class CoordinateParserTest {
     @Test
     void testHashMapReturnedWhenTwoNumbersInput(){
         CoordinateParser cp = new CoordinateParser();
-        HashMap<Character, Integer> result = cp.parseCoordinates(new char[] {1,2});
+        HashMap<Character, Integer> result = cp.parseCoordinates(new char[] {'1','2'});
         HashMap<Character, Integer> expected = new HashMap<>();
         expected.put('x', 1);
         expected.put('y', 2);
