@@ -1,6 +1,5 @@
 package input;
 
 public class PlateauSize {
-    private int x;
-    private int y;
+    Coordinates plateauSize;
 }
