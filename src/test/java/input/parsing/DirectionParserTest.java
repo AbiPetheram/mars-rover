@@ -58,4 +58,15 @@ class DirectionParserTest {
         CompassDirection result = dp.parseDirection("W");
         assertEquals(CompassDirection.WEST, result);
     }
+
+    @Test
+    void testLowerCaseDirection(){
+        DirectionParser dp = new DirectionParser();
+        assertAll(
+                () -> assertEquals(CompassDirection.WEST, dp.parseDirection("w")),
+                () -> assertEquals(CompassDirection.NORTH, dp.parseDirection("n")),
+                () -> assertEquals(CompassDirection.EAST, dp.parseDirection("e")),
+                () -> assertEquals(CompassDirection.SOUTH, dp.parseDirection("s"))
+        );
+    }
 }
