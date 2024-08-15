@@ -4,12 +4,10 @@ import input.CompassDirection;
 
 public class DirectionParser {
 
-    public CompassDirection parseDirection(char[] input){
-        for (char value : input){
-            if(!Character.isAlphabetic(value)){
+    public CompassDirection parseDirection(char input){
+            if(!Character.isAlphabetic(input)){
                 return null;
             }
-        }
         return null;
     }
 }
