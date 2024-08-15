@@ -13,6 +13,7 @@ public class InstructionParser {
                 case 'L' -> result[i] = Instruction.L;
                 case 'R' -> result[i] = Instruction.R;
                 case 'M' -> result[i] = Instruction.M;
+                default -> throw new IllegalArgumentException();
             }
         }
         return result;
