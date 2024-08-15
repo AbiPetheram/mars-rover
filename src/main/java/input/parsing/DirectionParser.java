@@ -8,7 +8,7 @@ public class DirectionParser {
         if(input.length() > 1 || !Character.isAlphabetic(input.charAt(0))){
             throw new IllegalArgumentException();
         }
-        return switch (input) {
+        return switch (input.toUpperCase()) {
             case "N" -> CompassDirection.NORTH;
             case "E" -> CompassDirection.EAST;
             case "S"-> CompassDirection.SOUTH;
