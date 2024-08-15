@@ -26,4 +26,11 @@ class DirectionParserTest {
         CompassDirection result = dp.parseDirection('%');
         assertEquals(null, result);
     }
+
+    @Test
+    void testNorthDirection(){
+        DirectionParser dp = new DirectionParser();
+        CompassDirection result = dp.parseDirection('N');
+        assertEquals(CompassDirection.NORTH, result);
+    }
 }
