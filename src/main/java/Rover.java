@@ -10,6 +10,14 @@ public class Rover {
         this.plateau = plateau;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
     public void rotate(Instruction instruction){
 
     }
