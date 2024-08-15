@@ -14,9 +14,16 @@ class DirectionParserTest {
     }
 
     @Test
-    void testInvalidDirection(){
+    void testNumberDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection('1');
+        assertEquals(null, result);
+    }
+
+    @Test
+    void testSpecialCharacterDirection(){
+        DirectionParser dp = new DirectionParser();
+        CompassDirection result = dp.parseDirection('%');
         assertEquals(null, result);
     }
 }
