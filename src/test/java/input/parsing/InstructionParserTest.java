@@ -32,14 +32,14 @@ class InstructionParserTest {
     }
 
     @Test
-    void testLReturnsArrayWithL(){
+    void testReturnsArrayWithL(){
         InstructionParser ip = new InstructionParser();
         Instruction[] result = ip.parseInstructions("L");
         assertArrayEquals(new Instruction[]{Instruction.L}, result);
     }
 
     @Test
-    void testLReturnsArrayWithFiveLs(){
+    void testReturnsArrayWithFiveLs(){
         InstructionParser ip = new InstructionParser();
         Instruction[] result = ip.parseInstructions("LLLLL");
         Instruction[] expected = new Instruction[]{Instruction.L, Instruction.L, Instruction.L, Instruction.L, Instruction.L};
@@ -47,7 +47,7 @@ class InstructionParserTest {
     }
 
     @Test
-    void testLReturnsArrayWithLRMIndividually(){
+    void testReturnsArrayWithLRMIndividually(){
         InstructionParser ip = new InstructionParser();
         assertAll(
                 () -> assertArrayEquals(new Instruction[]{Instruction.L}, ip.parseInstructions("L")),
@@ -57,7 +57,7 @@ class InstructionParserTest {
     }
 
     @Test
-    void testLReturnsArrayWithMixedStringValidInput(){
+    void testReturnsArrayWithMixedStringValidInput(){
         InstructionParser ip = new InstructionParser();
         assertAll(
                 () -> assertArrayEquals(new Instruction[]{Instruction.L, Instruction.R, Instruction.M}, ip.parseInstructions("LRM")),
@@ -67,7 +67,7 @@ class InstructionParserTest {
     }
 
     @Test
-    void testLReturnsArrayWithMixedStringInvalidInput(){
+    void testReturnsArrayWithMixedStringInvalidInput(){
         InstructionParser ip = new InstructionParser();
         assertAll(
                 () -> assertThrows(IllegalArgumentException.class,
@@ -76,6 +76,16 @@ class InstructionParserTest {
                         ()-> ip.parseInstructions("PRRM")),
                 () -> assertThrows(IllegalArgumentException.class,
                         ()->  ip.parseInstructions("MR9M"))
+        );
+    }
+
+    @Test
+    void testReturnsArrayWhenPassedLowerCase(){
+        InstructionParser ip = new InstructionParser();
+        assertAll(
+                () -> assertArrayEquals(new Instruction[]{Instruction.L, Instruction.R, Instruction.M}, ip.parseInstructions("lrm")),
+                () -> assertArrayEquals(new Instruction[]{Instruction.R, Instruction.R, Instruction.R, Instruction.M}, ip.parseInstructions("rrrm")),
+                () -> assertArrayEquals(new Instruction[]{Instruction.M, Instruction.R, Instruction.L, Instruction.M}, ip.parseInstructions("mrlm"))
         );
     }
 
