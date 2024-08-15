@@ -15,4 +15,12 @@ class InstructionParserTest {
         );
     }
 
+    @Test
+    void testEmptyStringInstructions(){
+        InstructionParser ip = new InstructionParser();
+        assertThrows(IllegalArgumentException.class,
+                ()-> ip.parseInstructions("")
+        );
+    }
+
 }
