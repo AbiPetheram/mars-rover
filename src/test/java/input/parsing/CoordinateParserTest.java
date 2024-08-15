@@ -21,7 +21,7 @@ class CoordinateParserTest {
     void testArrayOfOneCoordinateThrowsIllegalArgumentException(){
         CoordinateParser cp = new CoordinateParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> cp.parseCoordinates(new char[]{1})
+                ()-> cp.parseCoordinates(new char[]{'1'})
         );
     }
 
@@ -29,7 +29,15 @@ class CoordinateParserTest {
     void testAlphabeticalCharacterThrowsIllegalArgumentException(){
         CoordinateParser cp = new CoordinateParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> cp.parseCoordinates(new char[]{1, 'A'})
+                ()-> cp.parseCoordinates(new char[]{'1', 'A'})
+        );
+    }
+
+    @Test
+    void testThreeNumbersInputThrowsIllegalArgumentException(){
+        CoordinateParser cp = new CoordinateParser();
+        assertThrows(IllegalArgumentException.class,
+                ()-> cp.parseCoordinates(new char[]{'1','2', '2'})
         );
     }
 
