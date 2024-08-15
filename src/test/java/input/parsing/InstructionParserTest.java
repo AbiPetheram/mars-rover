@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class InstructionParserTest {
 
     @Test
-    void testNullInstructions(){
+    void testNullInstructionsThrowsIllegalArgumentException(){
         InstructionParser ip = new InstructionParser();
         assertThrows(IllegalArgumentException.class,
                 ()-> ip.parseInstructions(null)
@@ -16,10 +16,18 @@ class InstructionParserTest {
     }
 
     @Test
-    void testEmptyStringInstructions(){
+    void testEmptyStringInstructionsThrowsIllegalArgumentException(){
         InstructionParser ip = new InstructionParser();
         assertThrows(IllegalArgumentException.class,
                 ()-> ip.parseInstructions("")
+        );
+    }
+
+    @Test
+    void testNumericalInstructionsThrowsIllegalArgumentException(){
+        InstructionParser ip = new InstructionParser();
+        assertThrows(IllegalArgumentException.class,
+                ()-> ip.parseInstructions("23")
         );
     }
 
