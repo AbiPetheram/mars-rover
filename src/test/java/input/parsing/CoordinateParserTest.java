@@ -51,4 +51,14 @@ class CoordinateParserTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    void testHashMapReturnedWhenTwoDoubleDigitNumbersInput(){
+        CoordinateParser cp = new CoordinateParser();
+        HashMap<Character, Integer> result = cp.parseCoordinates(new String[] {"12","26"});
+        HashMap<Character, Integer> expected = new HashMap<>();
+        expected.put('x', 12);
+        expected.put('y', 26);
+        assertEquals(expected, result);
+    }
+
 }
