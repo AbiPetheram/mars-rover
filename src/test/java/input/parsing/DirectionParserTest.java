@@ -38,20 +38,20 @@ class DirectionParserTest {
     void testEastDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection('E');
-        assertEquals(CompassDirection.NORTH, result);
+        assertEquals(CompassDirection.EAST, result);
     }
 
     @Test
     void testSouthDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection('S');
-        assertEquals(CompassDirection.NORTH, result);
+        assertEquals(CompassDirection.SOUTH, result);
     }
 
     @Test
     void testWestDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection('W');
-        assertEquals(CompassDirection.NORTH, result);
+        assertEquals(CompassDirection.WEST, result);
     }
 }
