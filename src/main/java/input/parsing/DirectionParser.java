@@ -8,6 +8,6 @@ public class DirectionParser {
             if(!Character.isAlphabetic(input)){
                 return null;
             }
-        return null;
+        return CompassDirection.NORTH;
     }
 }
