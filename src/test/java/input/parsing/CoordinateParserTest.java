@@ -10,10 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class CoordinateParserTest {
 
     @Test
-    void testNullCoordinate(){
+    void testNullCoordinateThrowsIllegalArgumentException(){
         CoordinateParser cp = new CoordinateParser();
-        HashMap<Character, Integer> result = cp.parseCoordinates(null);
-        assertEquals(null, result);
+        assertThrows(IllegalArgumentException.class,
+                ()-> cp.parseCoordinates(null)
+        );
+    }
+
+    @Test
+    void testArrayOfOneCoordinateThrowsIllegalArgumentException(){
+        CoordinateParser cp = new CoordinateParser();
+        assertThrows(IllegalArgumentException.class,
+                ()-> cp.parseCoordinates(new char[]{1})
+        );
     }
 
 }
