@@ -6,14 +6,14 @@ public class DirectionParser {
 
     public CompassDirection parseDirection(char input){
         if(!Character.isAlphabetic(input)){
-            return null;
+            throw new IllegalArgumentException();
         }
         return switch (input) {
             case 'N' -> CompassDirection.NORTH;
             case 'E' -> CompassDirection.EAST;
             case 'S' -> CompassDirection.SOUTH;
             case 'W' -> CompassDirection.WEST;
-            default -> null;
+            default -> throw new IllegalArgumentException();
         };
     }
 }
