@@ -25,4 +25,12 @@ class CoordinateParserTest {
         );
     }
 
+    @Test
+    void testAlphabeticalCharacterThrowsIllegalArgumentException(){
+        CoordinateParser cp = new CoordinateParser();
+        assertThrows(IllegalArgumentException.class,
+                ()-> cp.parseCoordinates(new char[]{1, 'A'})
+        );
+    }
+
 }
