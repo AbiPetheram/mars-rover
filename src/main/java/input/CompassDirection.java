@@ -1,6 +1,6 @@
 package input;
 
-public enum Directions {
+public enum CompassDirection {
     NORTH,
     EAST,
     SOUTH,
