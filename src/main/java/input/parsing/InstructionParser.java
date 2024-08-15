@@ -8,7 +8,9 @@ public class InstructionParser {
             throw new IllegalArgumentException();
         }
         Instruction[] result = new Instruction[input.length()];
-        result[0] = Instruction.L;
+        for (int i = 0; i < input.length(); i++){
+            result[i] = Instruction.L;
+        }
         return result;
     }
 }

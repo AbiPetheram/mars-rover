@@ -38,4 +38,12 @@ class InstructionParserTest {
         assertArrayEquals(new Instruction[]{Instruction.L}, result);
     }
 
+    @Test
+    void testLReturnsArrayWithFiveLs(){
+        InstructionParser ip = new InstructionParser();
+        Instruction[] result = ip.parseInstructions("LLLLL");
+        Instruction[] expected = new Instruction[]{Instruction.L, Instruction.L, Instruction.L, Instruction.L, Instruction.L};
+        assertArrayEquals(expected, result);
+    }
+
 }
