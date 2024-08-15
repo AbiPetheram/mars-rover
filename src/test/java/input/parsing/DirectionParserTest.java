@@ -12,4 +12,11 @@ class DirectionParserTest {
         CompassDirection result = dp.parseDirection(null);
         assertEquals(null, result);
     }
+
+    @Test
+    void testInvalidDirection(){
+        DirectionParser dp = new DirectionParser();
+        CompassDirection result = dp.parseDirection(new String[]{"q"});
+        assertEquals(null, result);
+    }
 }
