@@ -11,7 +11,7 @@ class DirectionParserTest {
     void testEmptyCharDirectionThrowsIllegalArgumentException(){
         DirectionParser dp = new DirectionParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> dp.parseDirection(' ')
+                ()-> dp.parseDirection(" ")
         );
     }
 
@@ -19,7 +19,7 @@ class DirectionParserTest {
     void testNumberDirectionThrowsIllegalArgumentException(){
         DirectionParser dp = new DirectionParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> dp.parseDirection('1')
+                ()-> dp.parseDirection("1")
         );
     }
 
@@ -27,35 +27,35 @@ class DirectionParserTest {
     void testSpecialCharacterDirectionThrowsIllegalArgumentException(){
         DirectionParser dp = new DirectionParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> dp.parseDirection('%')
+                ()-> dp.parseDirection("%")
         );
     }
 
     @Test
     void testNorthDirection(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection('N');
+        CompassDirection result = dp.parseDirection("N");
         assertEquals(CompassDirection.NORTH, result);
     }
 
     @Test
     void testEastDirection(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection('E');
+        CompassDirection result = dp.parseDirection("E");
         assertEquals(CompassDirection.EAST, result);
     }
 
     @Test
     void testSouthDirection(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection('S');
+        CompassDirection result = dp.parseDirection("S");
         assertEquals(CompassDirection.SOUTH, result);
     }
 
     @Test
     void testWestDirection(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection('W');
+        CompassDirection result = dp.parseDirection("W");
         assertEquals(CompassDirection.WEST, result);
     }
 }
