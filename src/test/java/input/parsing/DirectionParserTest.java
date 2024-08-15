@@ -6,25 +6,29 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DirectionParserTest {
+
     @Test
-    void testEmptyCharDirection(){
+    void testEmptyCharDirectionThrowsIllegalArgumentException(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection(' ');
-        assertEquals(null, result);
+        assertThrows(IllegalArgumentException.class,
+                ()-> dp.parseDirection(' ')
+        );
     }
 
     @Test
-    void testNumberDirection(){
+    void testNumberDirectionThrowsIllegalArgumentException(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection('1');
-        assertEquals(null, result);
+        assertThrows(IllegalArgumentException.class,
+                ()-> dp.parseDirection('1')
+        );
     }
 
     @Test
-    void testSpecialCharacterDirection(){
+    void testSpecialCharacterDirectionThrowsIllegalArgumentException(){
         DirectionParser dp = new DirectionParser();
-        CompassDirection result = dp.parseDirection('%');
-        assertEquals(null, result);
+        assertThrows(IllegalArgumentException.class,
+                ()-> dp.parseDirection('%')
+        );
     }
 
     @Test
