@@ -21,7 +21,7 @@ class CoordinateParserTest {
     void testArrayOfOneCoordinateThrowsIllegalArgumentException(){
         CoordinateParser cp = new CoordinateParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> cp.parseCoordinates(new char[]{'1'})
+                ()-> cp.parseCoordinates(new String[]{"1"})
         );
     }
 
@@ -29,7 +29,7 @@ class CoordinateParserTest {
     void testAlphabeticalCharacterThrowsIllegalArgumentException(){
         CoordinateParser cp = new CoordinateParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> cp.parseCoordinates(new char[]{'1', 'A'})
+                ()-> cp.parseCoordinates(new String[]{"1", "A"})
         );
     }
 
@@ -37,14 +37,14 @@ class CoordinateParserTest {
     void testThreeNumbersInputThrowsIllegalArgumentException(){
         CoordinateParser cp = new CoordinateParser();
         assertThrows(IllegalArgumentException.class,
-                ()-> cp.parseCoordinates(new char[]{'1','2', '2'})
+                ()-> cp.parseCoordinates(new String[]{"1","2", "2"})
         );
     }
 
     @Test
     void testHashMapReturnedWhenTwoNumbersInput(){
         CoordinateParser cp = new CoordinateParser();
-        HashMap<Character, Integer> result = cp.parseCoordinates(new char[] {'1','2'});
+        HashMap<Character, Integer> result = cp.parseCoordinates(new String[] {"1","2"});
         HashMap<Character, Integer> expected = new HashMap<>();
         expected.put('x', 1);
         expected.put('y', 2);
