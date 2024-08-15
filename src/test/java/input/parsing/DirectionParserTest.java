@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class DirectionParserTest {
     @Test
     void testNullDirection(){
-        CompassDirection result = DirectionParser.parseDirection(null);
+        DirectionParser dp = new DirectionParser();
+        CompassDirection result = dp.parseDirection(null);
         assertEquals(null, result);
     }
 }
