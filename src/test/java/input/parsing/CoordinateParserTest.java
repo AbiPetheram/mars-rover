@@ -1,6 +1,7 @@
 package input.parsing;
 
 import input.CompassDirection;
+import input.Coordinates;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -42,23 +43,17 @@ class CoordinateParserTest {
     }
 
     @Test
-    void testHashMapReturnedWhenTwoNumbersInput(){
+    void testCoordinatesReturnedWhenTwoNumbersInput(){
         CoordinateParser cp = new CoordinateParser();
-        HashMap<Character, Integer> result = cp.parseCoordinates(new String[] {"1","2"});
-        HashMap<Character, Integer> expected = new HashMap<>();
-        expected.put('x', 1);
-        expected.put('y', 2);
-        assertEquals(expected, result);
+        Coordinates result = cp.parseCoordinates(new String[] {"1","2"});
+        assertEquals(new Coordinates(1, 2), result);
     }
 
     @Test
-    void testHashMapReturnedWhenTwoDoubleDigitNumbersInput(){
+    void testCoordinatesReturnedWhenTwoDoubleDigitNumbersInput(){
         CoordinateParser cp = new CoordinateParser();
-        HashMap<Character, Integer> result = cp.parseCoordinates(new String[] {"12","26"});
-        HashMap<Character, Integer> expected = new HashMap<>();
-        expected.put('x', 12);
-        expected.put('y', 26);
-        assertEquals(expected, result);
+        Coordinates result = cp.parseCoordinates(new String[] {"12","26"});
+        assertEquals(new Coordinates(12, 26), result);
     }
 
 }
