@@ -10,7 +10,6 @@ class InstructionParserTest {
     @Test
     void testNullInstructions(){
         InstructionParser ip = new InstructionParser();
-        Instruction[] result = ip.parseInstructions(null);
         assertThrows(IllegalArgumentException.class,
                 ()-> ip.parseInstructions(null)
         );
