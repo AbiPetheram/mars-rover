@@ -16,7 +16,9 @@ public class MissionControl {
         if(coordinates == null){
             throw new IllegalArgumentException();
         }
-        return new Plateau(coordinates);
+        Plateau plateau = new Plateau(coordinates);
+        plateauRovers.put(plateau, new ArrayList<>());
+        return plateau;
     }
 
     public Rover createRover(Position position, Plateau plateau){
