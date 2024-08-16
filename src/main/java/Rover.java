@@ -1,4 +1,5 @@
 import input.CompassDirection;
+import input.Coordinates;
 import input.Instruction;
 import input.Position;
 
@@ -29,9 +30,12 @@ public class Rover {
         }
     }
 
-    private void moveForward(){
+    private void moveForward(Instruction instruction){
         //takes Instruction.M and moves forward in a direction
         //check that the rover can move - is within plateau && position is empty
+        if(instruction == Instruction.M){
+            position = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
+        }
     }
 
     private void rotate(Instruction instruction){
