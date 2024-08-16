@@ -18,7 +18,10 @@ public class MissionControl {
         return new Plateau(coordinates);
     }
 
-    public Rover createRover(Plateau plateau, Position position){
+    public Rover createRover(Position position, Plateau plateau){
+        if(position == null || plateau == null){
+            throw new IllegalArgumentException();
+        }
         Rover rover = new Rover(position, plateau);
         rovers.add(rover);
         return rover;
