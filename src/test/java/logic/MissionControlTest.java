@@ -37,7 +37,7 @@ class MissionControlTest {
     @Test
     void createRoverValidInput(){
         MissionControl mc = new MissionControl();
-        Position position = new Position(new Coordinates(2,3), CompassDirection.NORTH);
+        Position position = new Position(new Coordinates(2,3), CompassDirection.N);
         Plateau plateau = new Plateau(new Coordinates(2,3));
         Rover rover = new Rover(position, plateau, mc);
         assertThat(mc.createRover(position, plateau), samePropertyValuesAs(rover));
@@ -89,10 +89,10 @@ class MissionControlTest {
     void testIsPositionEmpty(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        mc.createRover(new Position(new Coordinates(2,2),CompassDirection.NORTH), plateau);
-        mc.createRover(new Position(new Coordinates(2,1),CompassDirection.NORTH), plateau);
-        boolean result = mc.isPositionEmpty(new Coordinates(2,2), plateau);
-        boolean result2 = mc.isPositionEmpty(new Coordinates(2,1), plateau);
+        Rover rover1 = mc.createRover(new Position(new Coordinates(2,2),CompassDirection.N), plateau);
+        Rover rover2 = mc.createRover(new Position(new Coordinates(2,1),CompassDirection.N), plateau);
+        boolean result = mc.isPositionEmpty(new Coordinates(2,2), plateau, rover2);
+        boolean result2 = mc.isPositionEmpty(new Coordinates(2,1), plateau, rover1);
         assertFalse(result);
         assertFalse(result2);
     }

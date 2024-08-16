@@ -35,38 +35,38 @@ class DirectionParserTest {
     void testNorthDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection("N");
-        assertEquals(CompassDirection.NORTH, result);
+        assertEquals(CompassDirection.N, result);
     }
 
     @Test
     void testEastDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection("E");
-        assertEquals(CompassDirection.EAST, result);
+        assertEquals(CompassDirection.E, result);
     }
 
     @Test
     void testSouthDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection("S");
-        assertEquals(CompassDirection.SOUTH, result);
+        assertEquals(CompassDirection.S, result);
     }
 
     @Test
     void testWestDirection(){
         DirectionParser dp = new DirectionParser();
         CompassDirection result = dp.parseDirection("W");
-        assertEquals(CompassDirection.WEST, result);
+        assertEquals(CompassDirection.W, result);
     }
 
     @Test
     void testLowerCaseDirection(){
         DirectionParser dp = new DirectionParser();
         assertAll(
-                () -> assertEquals(CompassDirection.WEST, dp.parseDirection("w")),
-                () -> assertEquals(CompassDirection.NORTH, dp.parseDirection("n")),
-                () -> assertEquals(CompassDirection.EAST, dp.parseDirection("e")),
-                () -> assertEquals(CompassDirection.SOUTH, dp.parseDirection("s"))
+                () -> assertEquals(CompassDirection.W, dp.parseDirection("w")),
+                () -> assertEquals(CompassDirection.N, dp.parseDirection("n")),
+                () -> assertEquals(CompassDirection.E, dp.parseDirection("e")),
+                () -> assertEquals(CompassDirection.S, dp.parseDirection("s"))
         );
     }
 }
