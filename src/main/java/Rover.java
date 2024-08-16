@@ -34,7 +34,16 @@ public class Rover {
         //takes Instruction.M and moves forward in a direction
         //check that the rover can move - is within plateau && position is empty
         if(instruction == Instruction.M){
-            position = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
+            switch(position.getFacing()){
+                case NORTH ->
+                    position = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
+                case EAST ->
+                    position = new Position(new Coordinates(position.getCoordinates().x() + 1, position.getCoordinates().y()), position.getFacing());
+                case SOUTH ->
+                    position = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() - 1), position.getFacing());
+                case WEST ->
+                    position = new Position(new Coordinates(position.getCoordinates().x() - 1, position.getCoordinates().y()), position.getFacing());
+            }
         }
     }
 
