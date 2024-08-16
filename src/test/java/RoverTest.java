@@ -21,7 +21,7 @@ class RoverTest {
         Plateau plateau = new Plateau();
         Rover rover = new Rover(position, plateau);
         rover.move(null);
-        assertEquals(position, rover.getPosition());
+        assertThat(rover.getPosition(), samePropertyValuesAs(position));
     }
 
     @ParameterizedTest
