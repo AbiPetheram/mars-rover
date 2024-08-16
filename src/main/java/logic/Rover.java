@@ -30,7 +30,7 @@ public class Rover {
             if(instruction == Instruction.L || instruction == Instruction.R){
                 position = rotate(instruction);
             } else if (instruction == Instruction.M){
-                if(!missionControl.isPositionAvailable(moveForward(instruction).getCoordinates(), plateau)) {
+                if(!missionControl.isPositionInPlateau(moveForward(instruction).getCoordinates(), plateau)) {
                     throw new IllegalArgumentException();
                 }
                 position = moveForward(instruction);

@@ -44,43 +44,43 @@ class MissionControlTest {
     }
 
     @Test
-    void testIsPositionAvailableWhenCoordinatesMaxSizePlateau(){
+    void testIsPositionInPlateauWhenCoordinatesMaxSizePlateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(2,3), plateau);
+        boolean result = mc.isPositionInPlateau(new Coordinates(2,3), plateau);
         assertTrue(result);
     }
 
     @Test
-    void testIsPositionAvailableWhenCoordinates00Plateau(){
+    void testIsPositionInPlateauWhenCoordinates00Plateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(0,0), plateau);
+        boolean result = mc.isPositionInPlateau(new Coordinates(0,0), plateau);
         assertTrue(result);
     }
 
     @Test
-    void testIsPositionAvailableWhenXCoordinateBiggerThanPlateau(){
+    void testIsPositionInPlateauWhenXCoordinateBiggerThanPlateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(3,2), plateau);
+        boolean result = mc.isPositionInPlateau(new Coordinates(3,2), plateau);
         assertFalse(result);
     }
 
     @Test
-    void testIsPositionAvailableWhenYCoordinateBiggerThanPlateau(){
+    void testIsPositionInPlateauWhenYCoordinateBiggerThanPlateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(2,5), plateau);
+        boolean result = mc.isPositionInPlateau(new Coordinates(2,5), plateau);
         assertFalse(result);
     }
 
     @Test
-    void testIsPositionAvailableWithNegativeCoordinates(){
+    void testIsPositionInPlateauWithNegativeCoordinates(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(-2,5), plateau);
-        boolean result2 = mc.isPositionAvailable(new Coordinates(2,-5), plateau);
+        boolean result = mc.isPositionInPlateau(new Coordinates(-2,5), plateau);
+        boolean result2 = mc.isPositionInPlateau(new Coordinates(2,-5), plateau);
         assertFalse(result);
         assertFalse(result2);
     }

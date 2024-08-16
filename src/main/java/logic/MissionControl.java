@@ -2,8 +2,6 @@ package logic;
 import input.Coordinates;
 import input.Position;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MissionControl {
@@ -29,7 +27,7 @@ public class MissionControl {
         return rover;
     }
 
-    public boolean isPositionAvailable(Coordinates coordinates, Plateau plateau){
+    public boolean isPositionInPlateau(Coordinates coordinates, Plateau plateau){
         if(coordinates.x() <= plateau.getSize().x() && coordinates.x() >= 0){
             if(coordinates.y() <= plateau.getSize().y() && coordinates.y() >= 0){
                 return true;
@@ -37,4 +35,6 @@ public class MissionControl {
         }
         return false;
     }
+
+
 }
