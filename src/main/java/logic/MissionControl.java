@@ -24,7 +24,7 @@ public class MissionControl {
         if(position == null || plateau == null){
             throw new IllegalArgumentException();
         }
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, this);
         plateauRovers.put(plateau, rover);
         return rover;
     }

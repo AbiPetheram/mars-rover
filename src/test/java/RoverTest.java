@@ -1,4 +1,5 @@
 import input.*;
+import logic.MissionControl;
 import logic.Plateau;
 import logic.Rover;
 import org.junit.jupiter.api.Test;
@@ -15,9 +16,10 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class RoverTest {
     @Test
     void testNullInputMove(){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), CompassDirection.EAST);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(null);
         assertThat(result, samePropertyValuesAs(position));
     }
@@ -25,9 +27,10 @@ class RoverTest {
     @ParameterizedTest
     @MethodSource("rotateTestData")
     void testMoveRotateWithSingleInstruction(CompassDirection initial, CompassDirection resulting, Instruction instruction){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), initial);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{instruction});
         Position expected = new Position(new Coordinates(0,0), resulting);
         assertThat(result, samePropertyValuesAs(expected));
@@ -48,9 +51,10 @@ class RoverTest {
 
     @Test
     void testMoveForwardMoveWithSingleInstructionStartingNorth(){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), CompassDirection.NORTH);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(0,1), CompassDirection.NORTH);
         assertThat(result, samePropertyValuesAs(expected));
@@ -58,9 +62,10 @@ class RoverTest {
 
     @Test
     void testMoveForwardMoveWithSingleInstructionStartingEast(){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), CompassDirection.EAST);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(1,0), CompassDirection.EAST);
         assertThat(result, samePropertyValuesAs(expected));
@@ -70,7 +75,8 @@ class RoverTest {
     void testMoveForwardMoveWithSingleInstructionStartingWest(){
         Position position = new Position(new Coordinates(1,1), CompassDirection.WEST);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        MissionControl mc = new MissionControl();
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(0,1), CompassDirection.WEST);
         assertThat(result, samePropertyValuesAs(expected));
@@ -78,9 +84,10 @@ class RoverTest {
 
     @Test
     void testMoveForwardMoveWithSingleInstructionStartingSouth(){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(1,1), CompassDirection.SOUTH);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(1,0), CompassDirection.SOUTH);
         assertThat(result, samePropertyValuesAs(expected));
@@ -89,9 +96,10 @@ class RoverTest {
     @ParameterizedTest
     @MethodSource("multiRotateTestData")
     void testMoveRotateWithMultipleInstructions(CompassDirection initial, CompassDirection resulting, Instruction instruction1, Instruction instruction2, Instruction instruction3){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), initial);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{instruction1, instruction2, instruction3});
         Position expected = new Position(new Coordinates(0,0), resulting);
         assertThat(result, samePropertyValuesAs(expected));
@@ -111,9 +119,10 @@ class RoverTest {
     @ParameterizedTest
     @MethodSource("threeSpacesMoveForwardTestData")
     void testMoveForwardThreeSpacesAllDirections(CompassDirection direction, Instruction move, Coordinates coordinates){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(3,3), direction);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{move, move, move});
         Position expected = new Position(coordinates, direction);
         assertThat(result, samePropertyValuesAs(expected));
@@ -133,9 +142,10 @@ class RoverTest {
     void testMoveForwardAndRotate(CompassDirection initial, CompassDirection endDirection, Coordinates endCoordinates,
                                   Instruction instruction1, Instruction instruction2,
                                   Instruction instruction3, Instruction instruction4){
+        MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(3,3), initial);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         Position result = rover.move(new Instruction[]{instruction1, instruction2, instruction3, instruction4});
         Position expected = new Position(endCoordinates, endDirection);
         assertThat(result, samePropertyValuesAs(expected));

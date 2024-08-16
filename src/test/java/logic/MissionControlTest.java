@@ -39,7 +39,7 @@ class MissionControlTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(2,3), CompassDirection.NORTH);
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        Rover rover = new Rover(position, plateau);
+        Rover rover = new Rover(position, plateau, mc);
         assertThat(mc.createRover(position, plateau), samePropertyValuesAs(rover));
     }
 

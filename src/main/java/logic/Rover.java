@@ -8,10 +8,12 @@ import input.Position;
 public class Rover {
     private Position position;
     private Plateau plateau;
+    private MissionControl missionControl;
 
-    public Rover(Position position, Plateau plateau) {
+    public Rover(Position position, Plateau plateau, MissionControl missionControl) {
         this.position = position;
         this.plateau = plateau;
+        this.missionControl = missionControl;
     }
 
     public Position getPosition() {
