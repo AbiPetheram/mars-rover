@@ -110,4 +110,24 @@ class RoverTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("threeSpacesMoveForwardTestData")
+    void testMoveForwardThreeSpacesAllDirections(CompassDirection direction, Instruction move, Coordinates coordinates){
+        Position position = new Position(new Coordinates(3,3), direction);
+        Plateau plateau = new Plateau();
+        Rover rover = new Rover(position, plateau);
+        rover.move(new Instruction[]{move, move, move});
+        Position expected = new Position(coordinates, direction);
+        assertThat(rover.getPosition(), samePropertyValuesAs(expected));
+    }
+
+    static Stream<Arguments> threeSpacesMoveForwardTestData(){
+        return Stream.of(
+                arguments(CompassDirection.NORTH, Instruction.M, new Coordinates(3, 6)),
+                arguments(CompassDirection.EAST, Instruction.M, new Coordinates(6, 3)),
+                arguments(CompassDirection.SOUTH, Instruction.M, new Coordinates(3, 0)),
+                arguments(CompassDirection.WEST, Instruction.M, new Coordinates(0, 3))
+        );
+    }
+
 }
