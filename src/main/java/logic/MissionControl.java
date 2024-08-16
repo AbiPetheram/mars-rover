@@ -2,13 +2,15 @@ package logic;
 import input.Coordinates;
 import input.Position;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MissionControl {
-    ArrayList<Rover> rovers;
+    HashMap<Plateau, Rover> plateauRovers;
 
     public MissionControl() {
-        this.rovers = new ArrayList<>();
+        this.plateauRovers = new HashMap<>();
     }
 
     public Plateau createPlateau(Coordinates coordinates){
@@ -23,7 +25,16 @@ public class MissionControl {
             throw new IllegalArgumentException();
         }
         Rover rover = new Rover(position, plateau);
-        rovers.add(rover);
+        plateauRovers.put(plateau, rover);
         return rover;
+    }
+
+    public boolean isPositionAvailable(Coordinates coordinates, Plateau plateau){
+        if(coordinates.x() <= plateau.getSize().x() && coordinates.x() >= 0){
+            if(coordinates.y() <= plateau.getSize().y() && coordinates.y() >= 0){
+                return true;
+            }
+        }
+        return false;
     }
 }
