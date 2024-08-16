@@ -16,4 +16,9 @@ public class Position {
         this.coordinates = coordinates;
         this.facing = facing;
     }
+
+    @Override
+    public String toString() {
+        return this.getCoordinates().x() + " " + this.getCoordinates().y() + " " + facing.name();
+    }
 }
