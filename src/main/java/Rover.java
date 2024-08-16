@@ -20,48 +20,52 @@ public class Rover {
         return plateau;
     }
 
-    public void move(Instruction[] instructions){
+    public Position move(Instruction[] instructions){
+        if (instructions == null) {return position;};
         for (Instruction instruction: instructions){
             if(instruction == Instruction.L || instruction == Instruction.R){
-                rotate(instruction);
+                position = rotate(instruction);
             } else if (instruction == Instruction.M){
-                moveForward(instruction);
+                position = moveForward(instruction);
             }
         }
+        return position;
     }
 
-    private void moveForward(Instruction instruction){
+    private Position moveForward(Instruction instruction){
         //takes Instruction.M and moves forward in a direction
         //check that the rover can move - is within plateau && position is empty
         if(instruction == Instruction.M){
-            switch(position.getFacing()){
+            return switch(position.getFacing()){
                 case NORTH ->
-                    position = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
+                    new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
                 case EAST ->
-                    position = new Position(new Coordinates(position.getCoordinates().x() + 1, position.getCoordinates().y()), position.getFacing());
+                    new Position(new Coordinates(position.getCoordinates().x() + 1, position.getCoordinates().y()), position.getFacing());
                 case SOUTH ->
-                    position = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() - 1), position.getFacing());
+                    new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() - 1), position.getFacing());
                 case WEST ->
-                    position = new Position(new Coordinates(position.getCoordinates().x() - 1, position.getCoordinates().y()), position.getFacing());
-            }
+                    new Position(new Coordinates(position.getCoordinates().x() - 1, position.getCoordinates().y()), position.getFacing());
+            };
         }
+        return position;
     }
 
-    private void rotate(Instruction instruction){
+    private Position rotate(Instruction instruction){
         if(instruction == Instruction.R){
-            switch(position.getFacing()){
-                case NORTH -> position = new Position(position.getCoordinates(), CompassDirection.EAST);
-                case EAST -> position = new Position(position.getCoordinates(), CompassDirection.SOUTH);
-                case SOUTH -> position = new Position(position.getCoordinates(), CompassDirection.WEST);
-                case WEST -> position = new Position(position.getCoordinates(), CompassDirection.NORTH);
-            }
+            return switch (position.getFacing()) {
+                case NORTH -> new Position(position.getCoordinates(), CompassDirection.EAST);
+                case EAST -> new Position(position.getCoordinates(), CompassDirection.SOUTH);
+                case SOUTH -> new Position(position.getCoordinates(), CompassDirection.WEST);
+                case WEST -> new Position(position.getCoordinates(), CompassDirection.NORTH);
+            };
         } else if(instruction == Instruction.L){
-            switch(position.getFacing()){
-                case NORTH -> position = new Position(position.getCoordinates(), CompassDirection.WEST);
-                case EAST -> position = new Position(position.getCoordinates(), CompassDirection.NORTH);
-                case SOUTH -> position = new Position(position.getCoordinates(), CompassDirection.EAST);
-                case WEST -> position = new Position(position.getCoordinates(), CompassDirection.SOUTH);
-            }
+            return switch(position.getFacing()){
+                case NORTH -> new Position(position.getCoordinates(), CompassDirection.WEST);
+                case EAST -> new Position(position.getCoordinates(), CompassDirection.NORTH);
+                case SOUTH -> new Position(position.getCoordinates(), CompassDirection.EAST);
+                case WEST -> new Position(position.getCoordinates(), CompassDirection.SOUTH);
+            };
         }
+        return position;
     }
 }
