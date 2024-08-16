@@ -85,4 +85,16 @@ class MissionControlTest {
         assertFalse(result2);
     }
 
+    @Test
+    void testIsPositionEmpty(){
+        MissionControl mc = new MissionControl();
+        Plateau plateau = new Plateau(new Coordinates(2,3));
+        Rover rover = new Rover(new Position(new Coordinates(2,2),CompassDirection.NORTH), plateau, mc);
+        Rover rover2 = new Rover(new Position(new Coordinates(2,1),CompassDirection.NORTH), plateau, mc);
+        boolean result = mc.isPositionEmpty(new Coordinates(2,2), plateau);
+        boolean result2 = mc.isPositionEmpty(new Coordinates(2,1), plateau);
+        assertFalse(result);
+        assertFalse(result2);
+    }
+
 }
