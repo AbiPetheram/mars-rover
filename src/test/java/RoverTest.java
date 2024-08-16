@@ -16,7 +16,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RoverTest {
     @Test
-    void testNullInputRotate(){
+    void testNullInputMove(){
         Position position = new Position(new Coordinates(0,0), CompassDirection.EAST);
         Plateau plateau = new Plateau();
         Rover rover = new Rover(position, plateau);
@@ -46,6 +46,16 @@ class RoverTest {
                 arguments(CompassDirection.SOUTH, CompassDirection.EAST, Instruction.L),
                 arguments(CompassDirection.EAST, CompassDirection.NORTH, Instruction.L)
         );
+    }
+
+    @Test
+    void testMoveForwardMoveWithSingleInstructionStartingNorth(){
+        Position position = new Position(new Coordinates(0,0), CompassDirection.NORTH);
+        Plateau plateau = new Plateau();
+        Rover rover = new Rover(position, plateau);
+        rover.move(new Instruction[]{Instruction.M});
+        Position expected = new Position(new Coordinates(0,1), CompassDirection.NORTH);
+        assertThat(rover.getPosition(), samePropertyValuesAs(expected));
     }
 
 }
