@@ -42,8 +42,11 @@ public class MissionControl {
         return false;
     }
 
-    public boolean isPositionEmpty(Coordinates coordinates, Plateau plateau){
+    public boolean isPositionEmpty(Coordinates coordinates, Plateau plateau, Rover movingRover){
         for(Rover rover : plateauRovers.get(plateau)){
+            if(rover.equals(movingRover)){
+                continue;
+            }
             if(rover.getPosition().getCoordinates().equals(coordinates)){
                 return false;
             }
