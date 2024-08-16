@@ -43,4 +43,28 @@ class MissionControlTest {
         assertThat(mc.createRover(position, plateau), samePropertyValuesAs(rover));
     }
 
+    @Test
+    void testIsPositionAvailableWhenCoordinatesMaxSizePlateau(){
+        MissionControl mc = new MissionControl();
+        Plateau plateau = new Plateau(new Coordinates(2,3));
+        boolean result = mc.isPositionAvailable(new Coordinates(2,3));
+        assertTrue(result);
+    }
+
+    @Test
+    void testIsPositionAvailableWhenCoordinates00Plateau(){
+        MissionControl mc = new MissionControl();
+        Plateau plateau = new Plateau(new Coordinates(2,3));
+        boolean result = mc.isPositionAvailable(new Coordinates(0,0));
+        assertTrue(result);
+    }
+
+    @Test
+    void testIsPositionAvailableWhenXCoordinateBiggerThanPlateau(){
+        MissionControl mc = new MissionControl();
+        Plateau plateau = new Plateau(new Coordinates(2,3));
+        boolean result = mc.isPositionAvailable(new Coordinates(3,2));
+        assertFalse(result);
+    }
+
 }
