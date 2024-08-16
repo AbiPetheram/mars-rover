@@ -88,4 +88,26 @@ class RoverTest {
         assertThat(rover.getPosition(), samePropertyValuesAs(expected));
     }
 
+    @ParameterizedTest
+    @MethodSource("multiRotateTestData")
+    void testMoveRotateWithMultipleInstructions(CompassDirection initial, CompassDirection resulting, Instruction instruction1, Instruction instruction2, Instruction instruction3){
+        Position position = new Position(new Coordinates(0,0), initial);
+        Plateau plateau = new Plateau();
+        Rover rover = new Rover(position, plateau);
+        rover.move(new Instruction[]{instruction1, instruction2, instruction3});
+        Position expected = new Position(new Coordinates(0,0), resulting);
+        assertThat(rover.getPosition(), samePropertyValuesAs(expected));
+    }
+
+    static Stream<Arguments> multiRotateTestData(){
+        return Stream.of(
+                arguments(CompassDirection.NORTH, CompassDirection.WEST, Instruction.R, Instruction.R, Instruction.R),
+                arguments(CompassDirection.EAST, CompassDirection.SOUTH, Instruction.R, Instruction.L, Instruction.R),
+                arguments(CompassDirection.SOUTH, CompassDirection.EAST, Instruction.R, Instruction.L, Instruction.L),
+                arguments(CompassDirection.NORTH, CompassDirection.EAST, Instruction.L, Instruction.L, Instruction.L),
+                arguments(CompassDirection.WEST, CompassDirection.SOUTH, Instruction.L, Instruction.R, Instruction.L),
+                arguments(CompassDirection.SOUTH, CompassDirection.WEST, Instruction.L, Instruction.R, Instruction.R)
+        );
+    }
+
 }
