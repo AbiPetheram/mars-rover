@@ -44,13 +44,13 @@ public class Rover {
         //check that the rover can move - is within plateau && position is empty
         if(instruction == Instruction.M){
             return switch(position.getFacing()){
-                case NORTH ->
+                case N ->
                     new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
-                case EAST ->
+                case E ->
                     new Position(new Coordinates(position.getCoordinates().x() + 1, position.getCoordinates().y()), position.getFacing());
-                case SOUTH ->
+                case S ->
                     new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() - 1), position.getFacing());
-                case WEST ->
+                case W ->
                     new Position(new Coordinates(position.getCoordinates().x() - 1, position.getCoordinates().y()), position.getFacing());
             };
         }
@@ -60,17 +60,17 @@ public class Rover {
     private Position rotate(Instruction instruction){
         if(instruction == Instruction.R){
             return switch (position.getFacing()) {
-                case NORTH -> new Position(position.getCoordinates(), CompassDirection.EAST);
-                case EAST -> new Position(position.getCoordinates(), CompassDirection.SOUTH);
-                case SOUTH -> new Position(position.getCoordinates(), CompassDirection.WEST);
-                case WEST -> new Position(position.getCoordinates(), CompassDirection.NORTH);
+                case N -> new Position(position.getCoordinates(), CompassDirection.E);
+                case E -> new Position(position.getCoordinates(), CompassDirection.S);
+                case S -> new Position(position.getCoordinates(), CompassDirection.W);
+                case W -> new Position(position.getCoordinates(), CompassDirection.N);
             };
         } else if(instruction == Instruction.L){
             return switch(position.getFacing()){
-                case NORTH -> new Position(position.getCoordinates(), CompassDirection.WEST);
-                case EAST -> new Position(position.getCoordinates(), CompassDirection.NORTH);
-                case SOUTH -> new Position(position.getCoordinates(), CompassDirection.EAST);
-                case WEST -> new Position(position.getCoordinates(), CompassDirection.SOUTH);
+                case N -> new Position(position.getCoordinates(), CompassDirection.W);
+                case E -> new Position(position.getCoordinates(), CompassDirection.N);
+                case S -> new Position(position.getCoordinates(), CompassDirection.E);
+                case W -> new Position(position.getCoordinates(), CompassDirection.S);
             };
         }
         return position;
