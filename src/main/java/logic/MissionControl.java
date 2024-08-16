@@ -2,10 +2,11 @@ package logic;
 import input.Coordinates;
 import input.Position;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MissionControl {
-    HashMap<Plateau, Rover> plateauRovers;
+    HashMap<Plateau, ArrayList<Rover>> plateauRovers;
 
     public MissionControl() {
         this.plateauRovers = new HashMap<>();
@@ -23,7 +24,10 @@ public class MissionControl {
             throw new IllegalArgumentException();
         }
         Rover rover = new Rover(position, plateau, this);
-        plateauRovers.put(plateau, rover);
+        if(!plateauRovers.containsKey(plateau)){
+            plateauRovers.put(plateau, new ArrayList<Rover>());
+        }
+        plateauRovers.get(plateau).add(rover);
         return rover;
     }
 
@@ -34,6 +38,15 @@ public class MissionControl {
             }
         }
         return false;
+    }
+
+    public boolean isPositionEmpty(Coordinates coordinates, Plateau plateau){
+        for(Rover rover : plateauRovers.get(plateau)){
+            if(rover.getPosition().getCoordinates().equals(coordinates)){
+                return false;
+            }
+        }
+        return true;
     }
 
 
