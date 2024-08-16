@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class RoverTest {
@@ -163,6 +164,39 @@ class RoverTest {
                         Instruction.L, Instruction.L, Instruction.L, Instruction.M),
                 arguments(CompassDirection.WEST, CompassDirection.EAST, new Coordinates(4, 2),
                         Instruction.L, Instruction.M, Instruction.L, Instruction.M)
+        );
+    }
+
+    @Test
+    void testMoveWhenEndCoordinates00Plateau(){
+        MissionControl mc = new MissionControl();
+        Position position = new Position(new Coordinates(1,1), CompassDirection.SOUTH);
+        Plateau plateau = new Plateau(new Coordinates(10, 10));
+        Rover rover = new Rover(position, plateau, mc);
+        Position result = rover.move(new Instruction[]{Instruction.M, Instruction.R, Instruction.M});
+        Position expected = new Position(new Coordinates(0,0), CompassDirection.WEST);
+        assertThat(result, samePropertyValuesAs(expected));
+    }
+
+    @Test
+    void testMoveWhenCoordinatesEndBiggerThanPlateau(){
+        MissionControl mc = new MissionControl();
+        Position position = new Position(new Coordinates(1,1), CompassDirection.NORTH);
+        Plateau plateau = new Plateau(new Coordinates(3, 3));
+        Rover rover = new Rover(position, plateau, mc);
+        assertThrows(IllegalArgumentException.class,
+                ()-> rover.move(new Instruction[]{Instruction.M, Instruction.M, Instruction.M, Instruction.M})
+        );
+    }
+
+    @Test
+    void testMoveWhenEndNegativeCoordinates(){
+        MissionControl mc = new MissionControl();
+        Position position = new Position(new Coordinates(1,1), CompassDirection.SOUTH);
+        Plateau plateau = new Plateau(new Coordinates(10, 10));
+        Rover rover = new Rover(position, plateau, mc);
+        assertThrows(IllegalArgumentException.class,
+                ()-> rover.move(new Instruction[]{Instruction.M, Instruction.M, Instruction.M})
         );
     }
 }
