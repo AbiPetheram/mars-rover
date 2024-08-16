@@ -67,4 +67,12 @@ class MissionControlTest {
         assertFalse(result);
     }
 
+    @Test
+    void testIsPositionAvailableWhenYCoordinateBiggerThanPlateau(){
+        MissionControl mc = new MissionControl();
+        Plateau plateau = new Plateau(new Coordinates(2,3));
+        boolean result = mc.isPositionAvailable(new Coordinates(2,5), plateau);
+        assertFalse(result);
+    }
+
 }
