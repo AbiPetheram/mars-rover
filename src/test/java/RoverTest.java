@@ -68,4 +68,14 @@ class RoverTest {
         assertThat(rover.getPosition(), samePropertyValuesAs(expected));
     }
 
+    @Test
+    void testMoveForwardMoveWithSingleInstructionStartingWest(){
+        Position position = new Position(new Coordinates(1,1), CompassDirection.WEST);
+        Plateau plateau = new Plateau();
+        Rover rover = new Rover(position, plateau);
+        rover.move(new Instruction[]{Instruction.M});
+        Position expected = new Position(new Coordinates(0,1), CompassDirection.WEST);
+        assertThat(rover.getPosition(), samePropertyValuesAs(expected));
+    }
+
 }
