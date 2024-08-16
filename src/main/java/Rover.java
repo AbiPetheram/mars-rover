@@ -20,7 +20,13 @@ public class Rover {
     }
 
     public void move(Instruction[] instructions){
-        //takes array of instructions and decides what to do with it
+        for (Instruction instruction: instructions){
+            if(instruction == Instruction.L || instruction == Instruction.R){
+                rotate(instruction);
+            } else if (instruction == Instruction.M){
+                moveForward(instruction);
+            }
+        }
     }
 
     private void moveForward(){
