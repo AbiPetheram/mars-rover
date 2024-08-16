@@ -130,4 +130,31 @@ class RoverTest {
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("moveForwardAndRotateTestData")
+    void testMoveForwardAndRotate(CompassDirection initial, CompassDirection endDirection, Coordinates endCoordinates,
+                                  Instruction instruction1, Instruction instruction2,
+                                  Instruction instruction3, Instruction instruction4){
+        Position position = new Position(new Coordinates(3,3), initial);
+        Plateau plateau = new Plateau();
+        Rover rover = new Rover(position, plateau);
+        Position result = rover.move(new Instruction[]{instruction1, instruction2, instruction3, instruction4});
+        Position expected = new Position(endCoordinates, endDirection);
+        assertThat(result, samePropertyValuesAs(expected));
+    }
+
+    static Stream<Arguments> moveForwardAndRotateTestData(){
+        return Stream.of(
+                arguments(CompassDirection.NORTH, CompassDirection.SOUTH, new Coordinates(4, 2),
+                        Instruction.R, Instruction.M, Instruction.R, Instruction.M),
+                arguments(CompassDirection.EAST, CompassDirection.WEST, new Coordinates(1, 3),
+                        Instruction.L, Instruction.L, Instruction.M, Instruction.M),
+                arguments(CompassDirection.SOUTH, CompassDirection.WEST, new Coordinates(1, 2),
+                        Instruction.M, Instruction.R, Instruction.M, Instruction.M),
+                arguments(CompassDirection.NORTH, CompassDirection.EAST, new Coordinates(4, 3),
+                        Instruction.L, Instruction.L, Instruction.L, Instruction.M),
+                arguments(CompassDirection.WEST, CompassDirection.EAST, new Coordinates(4, 2),
+                        Instruction.L, Instruction.M, Instruction.L, Instruction.M)
+        );
+    }
 }
