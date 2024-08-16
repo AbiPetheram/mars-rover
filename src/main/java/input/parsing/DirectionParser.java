@@ -9,10 +9,10 @@ public class DirectionParser {
             throw new IllegalArgumentException();
         }
         return switch (input.toUpperCase()) {
-            case "N" -> CompassDirection.NORTH;
-            case "E" -> CompassDirection.EAST;
-            case "S"-> CompassDirection.SOUTH;
-            case "W" -> CompassDirection.WEST;
+            case "N" -> CompassDirection.N;
+            case "E" -> CompassDirection.E;
+            case "S"-> CompassDirection.S;
+            case "W" -> CompassDirection.W;
             default -> throw new IllegalArgumentException();
         };
     }
