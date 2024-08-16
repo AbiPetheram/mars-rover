@@ -47,7 +47,7 @@ class MissionControlTest {
     void testIsPositionAvailableWhenCoordinatesMaxSizePlateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(2,3));
+        boolean result = mc.isPositionAvailable(new Coordinates(2,3), plateau);
         assertTrue(result);
     }
 
@@ -55,7 +55,7 @@ class MissionControlTest {
     void testIsPositionAvailableWhenCoordinates00Plateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(0,0));
+        boolean result = mc.isPositionAvailable(new Coordinates(0,0), plateau);
         assertTrue(result);
     }
 
@@ -63,7 +63,7 @@ class MissionControlTest {
     void testIsPositionAvailableWhenXCoordinateBiggerThanPlateau(){
         MissionControl mc = new MissionControl();
         Plateau plateau = new Plateau(new Coordinates(2,3));
-        boolean result = mc.isPositionAvailable(new Coordinates(3,2));
+        boolean result = mc.isPositionAvailable(new Coordinates(3,2), plateau);
         assertFalse(result);
     }
 
