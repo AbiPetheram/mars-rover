@@ -25,10 +25,13 @@ public class MissionControl {
         if(position == null || plateau == null){
             throw new IllegalArgumentException();
         }
-        Rover rover = new Rover(position, plateau, this);
         if(!plateauRovers.containsKey(plateau)){
             plateauRovers.put(plateau, new ArrayList<Rover>());
         }
+        if(!isPositionEmpty(position.getCoordinates(), plateau)){
+            throw new IllegalArgumentException();
+        }
+        Rover rover = new Rover(position, plateau, this);
         plateauRovers.get(plateau).add(rover);
         return rover;
     }
