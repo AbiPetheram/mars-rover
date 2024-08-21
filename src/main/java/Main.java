@@ -10,7 +10,7 @@ public class Main {
         MissionControl mc = new MissionControl();
         Plateau plateau = cs.getPlateau(mc);
         Rover rover = cs.addRoverToPlateau(mc, plateau);
-        Position position = cs.moveRover(rover);
+        cs.moveRover(rover);
         cs.optionsList(mc, plateau, rover);
     }
 }
