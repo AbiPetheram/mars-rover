@@ -33,6 +33,9 @@ public class Rover {
                 if(!missionControl.isPositionInPlateau(moveForward(instruction).getCoordinates(), plateau)) {
                     throw new IllegalArgumentException();
                 }
+                else if(!missionControl.isPositionEmpty(moveForward(instruction).getCoordinates(), plateau)){
+                    throw new IllegalArgumentException();
+                }
                 position = moveForward(instruction);
             }
         }
@@ -40,8 +43,6 @@ public class Rover {
     }
 
     private Position moveForward(Instruction instruction){
-        //takes Instruction.M and moves forward in a direction
-        //check that the rover can move - is within plateau && position is empty
         if(instruction == Instruction.M){
             return switch(position.getFacing()){
                 case N ->
