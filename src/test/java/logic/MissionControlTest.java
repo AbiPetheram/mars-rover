@@ -88,11 +88,11 @@ class MissionControlTest {
     @Test
     void testIsPositionEmpty(){
         MissionControl mc = new MissionControl();
-        Plateau plateau = new Plateau(new Coordinates(2,3));
-        Rover rover1 = mc.createRover(new Position(new Coordinates(2,2),CompassDirection.N), plateau);
-        Rover rover2 = mc.createRover(new Position(new Coordinates(2,1),CompassDirection.N), plateau);
-        boolean result = mc.isPositionEmpty(new Coordinates(2,2), plateau, rover2);
-        boolean result2 = mc.isPositionEmpty(new Coordinates(2,1), plateau, rover1);
+        Plateau plateau = mc.createPlateau(new Coordinates(2,3));
+        mc.createRover(new Position(new Coordinates(2,2),CompassDirection.N), plateau);
+        mc.createRover(new Position(new Coordinates(2,1),CompassDirection.N), plateau);
+        boolean result = mc.isPositionEmpty(new Coordinates(2,2), plateau);
+        boolean result2 = mc.isPositionEmpty(new Coordinates(2,1), plateau);
         assertFalse(result);
         assertFalse(result2);
     }

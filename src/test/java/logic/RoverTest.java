@@ -54,7 +54,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), CompassDirection.N);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(0,1), CompassDirection.N);
         assertThat(result, samePropertyValuesAs(expected));
@@ -65,7 +65,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), CompassDirection.E);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(1,0), CompassDirection.E);
         assertThat(result, samePropertyValuesAs(expected));
@@ -76,7 +76,7 @@ class RoverTest {
         Position position = new Position(new Coordinates(1,1), CompassDirection.W);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
         MissionControl mc = new MissionControl();
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(0,1), CompassDirection.W);
         assertThat(result, samePropertyValuesAs(expected));
@@ -87,7 +87,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(1,1), CompassDirection.S);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{Instruction.M});
         Position expected = new Position(new Coordinates(1,0), CompassDirection.S);
         assertThat(result, samePropertyValuesAs(expected));
@@ -99,7 +99,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(0,0), initial);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{instruction1, instruction2, instruction3});
         Position expected = new Position(new Coordinates(0,0), resulting);
         assertThat(result, samePropertyValuesAs(expected));
@@ -122,7 +122,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(3,3), direction);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{move, move, move});
         Position expected = new Position(coordinates, direction);
         assertThat(result, samePropertyValuesAs(expected));
@@ -145,7 +145,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(3,3), initial);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{instruction1, instruction2, instruction3, instruction4});
         Position expected = new Position(endCoordinates, endDirection);
         assertThat(result, samePropertyValuesAs(expected));
@@ -171,7 +171,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(1,1), CompassDirection.S);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         Position result = rover.move(new Instruction[]{Instruction.M, Instruction.R, Instruction.M});
         Position expected = new Position(new Coordinates(0,0), CompassDirection.W);
         assertThat(result, samePropertyValuesAs(expected));
@@ -182,7 +182,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(1,1), CompassDirection.N);
         Plateau plateau = new Plateau(new Coordinates(3, 3));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         assertThrows(IllegalArgumentException.class,
                 ()-> rover.move(new Instruction[]{Instruction.M, Instruction.M, Instruction.M, Instruction.M})
         );
@@ -193,7 +193,7 @@ class RoverTest {
         MissionControl mc = new MissionControl();
         Position position = new Position(new Coordinates(1,1), CompassDirection.S);
         Plateau plateau = new Plateau(new Coordinates(10, 10));
-        Rover rover = new Rover(position, plateau, mc);
+        Rover rover = mc.createRover(position, plateau);
         assertThrows(IllegalArgumentException.class,
                 ()-> rover.move(new Instruction[]{Instruction.M, Instruction.M, Instruction.M})
         );
