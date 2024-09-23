@@ -1,6 +1,7 @@
 package logic;
 import input.Coordinates;
 import input.Position;
+import ui.ConsoleInteraction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,6 +53,14 @@ public class MissionControl {
             }
         }
         return true;
+    }
+
+    public void start(){
+        ConsoleInteraction cs = new ConsoleInteraction();
+        Plateau plateau = cs.getPlateau(this);
+        Rover rover = cs.addRoverToPlateau(this, plateau);
+        cs.moveRover(rover);
+        cs.optionsList(this, plateau, rover);
     }
 
 
