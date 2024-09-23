@@ -11,7 +11,7 @@ Welcome to Mission Control, a place where exploration zones and rovers are manag
 
 # How to use
 
-## Key eatures
+## Key features
 
 In this Command Line Interface application, you can:
 
