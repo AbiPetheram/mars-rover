@@ -28,17 +28,17 @@ public class Rover {
         if (instructions == null) {return position;};
         for (Instruction instruction: instructions){
             if(instruction == Instruction.R){
-                position = rotateRight();
+               rotateRight();
             } else if(instruction == Instruction.L){
-                position = rotateLeft();
+                rotateLeft();
             } else if (instruction == Instruction.M){
-                position = moveForward(instruction);
+                moveForward(instruction);
             }
         }
         return position;
     }
 
-    private Position moveForward(Instruction instruction){
+    private void moveForward(Instruction instruction){
         Position newPosition = new Position(new Coordinates(0,0), CompassDirection.N);
         switch(position.getFacing()){
             case N ->
@@ -53,24 +53,24 @@ public class Rover {
         if(!missionControl.isPositionInPlateau(newPosition.getCoordinates(), plateau) || !missionControl.isPositionEmpty(newPosition.getCoordinates(), plateau)){
             throw new IllegalArgumentException();
         }
-        return newPosition;
+        position = newPosition;
     }
 
-    private Position rotateRight(){
-        return switch (position.getFacing()) {
-            case N -> new Position(position.getCoordinates(), CompassDirection.E);
-            case E -> new Position(position.getCoordinates(), CompassDirection.S);
-            case S -> new Position(position.getCoordinates(), CompassDirection.W);
-            case W -> new Position(position.getCoordinates(), CompassDirection.N);
+    private void rotateRight(){
+        switch (position.getFacing()) {
+            case N -> position = new Position(position.getCoordinates(), CompassDirection.E);
+            case E -> position = new Position(position.getCoordinates(), CompassDirection.S);
+            case S -> position = new Position(position.getCoordinates(), CompassDirection.W);
+            case W -> position = new Position(position.getCoordinates(), CompassDirection.N);
         };
     }
 
-    private Position rotateLeft(){
-        return switch(position.getFacing()){
-            case N -> new Position(position.getCoordinates(), CompassDirection.W);
-            case E -> new Position(position.getCoordinates(), CompassDirection.N);
-            case S -> new Position(position.getCoordinates(), CompassDirection.E);
-            case W -> new Position(position.getCoordinates(), CompassDirection.S);
+    private void rotateLeft(){
+        switch(position.getFacing()){
+            case N -> position = new Position(position.getCoordinates(), CompassDirection.W);
+            case E -> position = new Position(position.getCoordinates(), CompassDirection.N);
+            case S -> position = new Position(position.getCoordinates(), CompassDirection.E);
+            case W -> position = new Position(position.getCoordinates(), CompassDirection.S);
         };
     }
 
