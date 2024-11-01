@@ -13,21 +13,27 @@ import logic.Rover;
 import java.util.Scanner;
 
 public class ConsoleInteraction {
-    public Plateau getPlateau(MissionControl mc){
+    MissionControl missionControl;
+
+    public ConsoleInteraction(MissionControl missionControl) {
+        this.missionControl = missionControl;
+    }
+
+    public Plateau getPlateau(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! Please specify the dimensions of your plateau in the format 0 0: ");
         while(true){
             try{
                 CoordinateParser cp = new CoordinateParser();
                 Coordinates result = cp.parseCoordinates(scanner.nextLine().split(" "));
-                return mc.createPlateau(result);
+                return missionControl.createPlateau(result);
             } catch (IllegalArgumentException e){
                 System.out.println("Invalid input, please try again");
             }
         }
     }
 
-    public Rover addRoverToPlateau(MissionControl mc, Plateau plateau){
+    public Rover addRoverToPlateau(Plateau plateau){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Now add a rover to your plateau. Specify the location in the format 0 0 N: ");
         while(true){
@@ -37,7 +43,7 @@ public class ConsoleInteraction {
                 DirectionParser dp = new DirectionParser();
                 Coordinates coordinates = cp.parseCoordinates(new String[] {input[0], input[1]});
                 CompassDirection direction = dp.parseDirection(input[2]);
-                return mc.createRover(new Position(coordinates, direction), plateau);
+                return missionControl.createRover(new Position(coordinates, direction), plateau);
             } catch (IllegalArgumentException | IndexOutOfBoundsException e){
                 System.out.println("Invalid input, please try again");
             }
@@ -59,17 +65,17 @@ public class ConsoleInteraction {
         }
     }
 
-    public void optionsList(MissionControl mc, Plateau plateau, Rover rover){
+    public void optionsList(Plateau plateau, Rover rover){
         Scanner scanner = new Scanner(System.in);
         System.out.println("What would you like to do next?\n1. Add another Rover\n2. Move current Rover again\n3. Quit");
         switch(scanner.nextInt()){
             case 1 -> {
-                moveRover(addRoverToPlateau(mc, plateau));
-                optionsList(mc, plateau, rover);
+                moveRover(addRoverToPlateau(plateau));
+                optionsList(plateau, rover);
             }
             case 2 -> {
                 moveRover(rover);
-                optionsList(mc, plateau, rover);
+                optionsList(plateau, rover);
             }
             case 3 -> System.exit(0);
             default -> {

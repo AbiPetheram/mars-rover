@@ -56,11 +56,11 @@ public class MissionControl {
     }
 
     public void start(){
-        ConsoleInteraction cs = new ConsoleInteraction();
-        Plateau plateau = cs.getPlateau(this);
-        Rover rover = cs.addRoverToPlateau(this, plateau);
+        ConsoleInteraction cs = new ConsoleInteraction(this);
+        Plateau plateau = cs.getPlateau();
+        Rover rover = cs.addRoverToPlateau(plateau);
         cs.moveRover(rover);
-        cs.optionsList(this, plateau, rover);
+        cs.optionsList(plateau, rover);
     }
 
 
