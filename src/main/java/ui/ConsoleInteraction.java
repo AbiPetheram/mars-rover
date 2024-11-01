@@ -14,9 +14,15 @@ import java.util.Scanner;
 
 public class ConsoleInteraction {
     MissionControl missionControl;
+    CoordinateParser coordinateParser;
+    DirectionParser directionParser;
+    InstructionParser instructionParser;
 
     public ConsoleInteraction(MissionControl missionControl) {
         this.missionControl = missionControl;
+        this.coordinateParser = new CoordinateParser();
+        this.directionParser = new DirectionParser();
+        this.instructionParser = new InstructionParser();
     }
 
     public Plateau getPlateau(){
@@ -24,8 +30,7 @@ public class ConsoleInteraction {
         System.out.println("Hello! Please specify the dimensions of your plateau in the format 0 0: ");
         while(true){
             try{
-                CoordinateParser cp = new CoordinateParser();
-                Coordinates result = cp.parseCoordinates(scanner.nextLine().split(" "));
+                Coordinates result = coordinateParser.parseCoordinates(scanner.nextLine().split(" "));
                 return missionControl.createPlateau(result);
             } catch (IllegalArgumentException e){
                 System.out.println("Invalid input, please try again");
@@ -39,10 +44,8 @@ public class ConsoleInteraction {
         while(true){
             try{
                 String[] input = scanner.nextLine().split(" ");
-                CoordinateParser cp = new CoordinateParser();
-                DirectionParser dp = new DirectionParser();
-                Coordinates coordinates = cp.parseCoordinates(new String[] {input[0], input[1]});
-                CompassDirection direction = dp.parseDirection(input[2]);
+                Coordinates coordinates = coordinateParser.parseCoordinates(new String[] {input[0], input[1]});
+                CompassDirection direction = directionParser.parseDirection(input[2]);
                 return missionControl.createRover(new Position(coordinates, direction), plateau);
             } catch (IllegalArgumentException | IndexOutOfBoundsException e){
                 System.out.println("Invalid input, please try again");
@@ -55,8 +58,7 @@ public class ConsoleInteraction {
         System.out.println("Now time to take your rover for a walk. Enter a series of turn and move commands: ");
         while(true){
             try{
-                InstructionParser ip = new InstructionParser();
-                Position result = rover.move(ip.parseInstructions(scanner.nextLine()));
+                Position result = rover.move(instructionParser.parseInstructions(scanner.nextLine()));
                 System.out.println("The rover is now in position " + result.toString());
                 return result;
             } catch (IllegalArgumentException e){
