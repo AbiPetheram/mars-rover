@@ -32,12 +32,6 @@ public class Rover {
             } else if(instruction == Instruction.L){
                 position = rotateLeft();
             } else if (instruction == Instruction.M){
-                if(!missionControl.isPositionInPlateau(moveForward(instruction).getCoordinates(), plateau)) {
-                    throw new IllegalArgumentException();
-                }
-                else if(!missionControl.isPositionEmpty(moveForward(instruction).getCoordinates(), plateau)){
-                    throw new IllegalArgumentException();
-                }
                 position = moveForward(instruction);
             }
         }
@@ -45,19 +39,21 @@ public class Rover {
     }
 
     private Position moveForward(Instruction instruction){
-        if(instruction == Instruction.M){
-            return switch(position.getFacing()){
-                case N ->
-                    new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
-                case E ->
-                    new Position(new Coordinates(position.getCoordinates().x() + 1, position.getCoordinates().y()), position.getFacing());
-                case S ->
-                    new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() - 1), position.getFacing());
-                case W ->
-                    new Position(new Coordinates(position.getCoordinates().x() - 1, position.getCoordinates().y()), position.getFacing());
-            };
+        Position newPosition = new Position(new Coordinates(0,0), CompassDirection.N);
+        switch(position.getFacing()){
+            case N ->
+                newPosition = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() +1), position.getFacing());
+            case E ->
+                newPosition = new Position(new Coordinates(position.getCoordinates().x() + 1, position.getCoordinates().y()), position.getFacing());
+            case S ->
+                newPosition = new Position(new Coordinates(position.getCoordinates().x(), position.getCoordinates().y() - 1), position.getFacing());
+            case W ->
+                newPosition = new Position(new Coordinates(position.getCoordinates().x() - 1, position.getCoordinates().y()), position.getFacing());
+        };
+        if(!missionControl.isPositionInPlateau(newPosition.getCoordinates(), plateau) || !missionControl.isPositionEmpty(newPosition.getCoordinates(), plateau)){
+            throw new IllegalArgumentException();
         }
-        return position;
+        return newPosition;
     }
 
     private Position rotateRight(){
